@@ -81,7 +81,7 @@ class Spiller():
     
     def sjansekort(self, sjansekort, buyable_gater):
         felt_b4_flytt = self.flyttehistorikk["ankommet_felt"][-1]
-        if felt_b4_flytt in sjansekort["relokaliserende_kort"]:
+        if felt_b4_flytt in sjansekort["felter"]:
             """
             Sjekker om man har ankommet et sjansekort og utfører isåfall sjansekortets funksjon.
             """
@@ -114,7 +114,7 @@ class Spiller():
             if trukket_sjansekort == 27:
                 nytt_felt = 36
             
-            if trukket_sjansekort in [19, 20, 21, 22, 23, 24, 25, 26, 27]:
+            if trukket_sjansekort in sjansekort["relokaliserende_kort"]:
                 self.flytt(nytt_felt, 0)
             
             sjansekort["bunke"].pop(0)
@@ -133,7 +133,8 @@ def spilloppsett():
     
     sjansekort = {
         "bunke": [n for n in range(1,antall_sjansekort+1)], # Genererer sjansekort
-        "relokaliserende_kort": [3, 8, 18, 23, 34, 37]
+        "felter": [3, 8, 18, 23, 34, 37],
+        "relokaliserende_kort": [19, 20, 21, 22, 23, 24, 25, 26, 27]
         }
     random.shuffle(sjansekort["bunke"]) # Stokker sjansekortene
     spillere = [Spiller(spiller_nr+1) for spiller_nr in range(antall_spillere)]
@@ -223,7 +224,7 @@ def statistikk(antall_felter, spillere, df, df_gate_buys, df_betalingspliktige_f
             df[ (df["ankommet_felt"] == felt) & (df["forrige_felt"] == 21) ].shape[0]
         statistikk_felter["b_fra_sjansekort"][felt-1] =\
             df[ (df["ankommet_felt"] == felt) &\
-               (df["forrige_felt"].isin(sjansekort["relokaliserende_kort"])) &\
+               (df["forrige_felt"].isin(sjansekort["felter"])) &\
                    (df["terningkast"] == 0) ].shape[0]
     
     statistikk_felter["b_betalingspliktige"] =\
