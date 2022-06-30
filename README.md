@@ -7,4 +7,4 @@ Målene er å finne ut følgende:
 - Forventet gjennomsnittlig pengesum per spiller når alle gatene er kommet på/ kjøpt opp.
 
 Brettet ser slik ut:
-![spillebrett](https://user-images.githubusercontent.com/38361615/176785073-eeec9880-cc21-4571-a521-454835ffacc9.JPG)
+![spillebrett](https://user-images.githubusercontent.com/38361615/176785073-eeec9880-cc21-4571-a521-454835ffacc9.JPG | width=400)
